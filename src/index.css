@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #ff2800;
+  --accent-rgb: 255, 40, 0;
+  --bg-primary: #ffffff;
+  --bg-secondary: #faf7f1;
+  --card-bg: rgba(255, 255, 255, 0.58);
+  --nav-bg: rgba(255, 255, 255, 0.58);
+  --control-bg: rgba(255, 255, 255, 0.44);
+  --control-active: #ffffff;
+  --border: rgba(209, 213, 219, 0.72);
+  --heading: #001c40;
+  --text-primary: #001c40;
+  --text-secondary: rgba(0, 28, 64, 0.62);
+  --text-muted: rgba(0, 28, 64, 0.34);
+}
+
+.night-mode {
+  --bg-primary: #06111f;
+  --bg-secondary: #001c40;
+  --card-bg: rgba(255, 255, 255, 0.11);
+  --nav-bg: rgba(6, 17, 31, 0.74);
+  --control-bg: rgba(255, 255, 255, 0.08);
+  --control-active: rgba(255, 255, 255, 0.16);
+  --border: rgba(255, 255, 255, 0.22);
+  --heading: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.52);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(var(--accent-rgb), 0.11), transparent 28rem),
+    linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  font-family: 'Syne', sans-serif;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+.editorial-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.62);
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.22);
+  color: var(--heading);
+}
+
+.night-mode ::selection {
+  color: #ffffff;
+}
+
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23noise)' opacity='0.34'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 190px 190px;
+  mix-blend-mode: multiply;
+}
+
+.night-mode .grain-overlay {
+  mix-blend-mode: screen;
+  opacity: 0.11;
+}
+
+.monaco-grid {
+  background-image:
+    linear-gradient(rgba(0, 28, 64, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 28, 64, 0.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.night-mode .monaco-grid {
+  background-image:
+    linear-gradient(rgba(255, 230, 109, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 230, 109, 0.08) 1px, transparent 1px);
+}
+
+.night-mode .night-panel {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.night-mode .night-nav-panel {
+  background-color: rgba(6, 17, 31, 0.88);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+}
+
+.night-mode .night-control-panel {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.night-mode .nav-mark {
+  border-color: rgba(255, 255, 255, 0.78);
+  background: #ffffff;
+  color: #06111f;
+}
+
+.night-mode .accent-label {
+  color: #ff6a4d;
+  text-shadow: 0 0 18px rgba(255, 40, 0, 0.38);
+}
+
+.night-mode .top-fade {
+  --tw-gradient-from: rgba(6, 17, 31, 0.96) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgba(6, 17, 31, 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.night-mode .night-image {
+  mix-blend-mode: normal;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.34);
+}
+
+.night-mode .night-soft-mask {
+  background: linear-gradient(to bottom, var(--bg-primary), rgba(6, 17, 31, 0.58) 28%, rgba(6, 17, 31, 0.78) 68%, var(--bg-primary));
+}
+
+.night-mode .night-frame-mask {
+  opacity: 0.72;
+}
+
+.night-mode .night-row:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.night-mode .night-footer {
+  background: #06111f;
+}
+
+@media (max-width: 720px) {
+  body {
+    background:
+      radial-gradient(circle at 20% 8%, rgba(var(--accent-rgb), 0.16), transparent 18rem),
+      linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  }
+}
