@@ -20,6 +20,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('bio');
   const [themeMode, setThemeMode] = useState<ThemeMode>('light');
   const [flavor, setFlavor] = useState<FlavorType>('rosso-corsa');
+  const [showSplash, setShowSplash] = useState(true);
   const audioContextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
@@ -31,6 +32,14 @@ export default function App() {
     root.style.setProperty('--accent-rgb', activeFlavor.rgb);
     root.style.setProperty('--accent-label', `"${activeFlavor.label}"`);
   }, [flavor, themeMode]);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setShowSplash(false);
+    }, 1850);
+
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   const playPianoTransition = () => {
     const AudioContextCtor =
@@ -75,6 +84,43 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
+      <AnimatePresence>
+        {showSplash && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.45, ease: 'easeOut' } }}
+            className="fixed inset-0 z-[120] flex items-center justify-center bg-[#06111f]"
+          >
+            <div className="w-full max-w-xl px-8 text-center">
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+                className="font-orbitron text-[clamp(3.8rem,10vw,7rem)] font-black uppercase leading-none tracking-[0.14em] text-white"
+              >
+                CL16
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.1 }}
+                className="mt-4 font-syne text-xs uppercase tracking-[0.44em] text-white/74 sm:text-sm"
+              >
+                The Light Maestro
+              </motion.p>
+              <div className="mx-auto mt-10 h-px w-full overflow-hidden bg-white/14">
+                <motion.div
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 1.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-full bg-[#FF2800]"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-x-0 top-0 h-[28rem] bg-[linear-gradient(135deg,rgba(var(--accent-rgb),0.14),transparent_46%,rgba(209,213,219,0.24))]" />
         <div className="monaco-grid absolute inset-0 opacity-70" />

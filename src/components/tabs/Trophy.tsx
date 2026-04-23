@@ -1,6 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
+// Celebration Images
+import WinBelgium19 from '../../assets/Leclerc Belgium 2019.jpg';
+import WinItaly19 from '../../assets/Leclerc Italy 2019.jpg';
+import WinBahrain22 from '../../assets/Leclerc Bahrain 2022.jpg';
+import WinAustralia22 from '../../assets/Leclerc Australia 2022.jpg';
+import WinAustria22 from '../../assets/Leclerc Austria 2022.jpg';
+import WinMonaco24 from '../../assets/Leclerc Monaco 2024.webp';
+import WinItaly24 from '../../assets/Leclerc Italy 2024.jpg';
+import WinUS24 from '../../assets/Leclerc US 2024.webp';
+
 const WINS = [
   {
     gp: 'Belgian Grand Prix',
@@ -8,6 +18,7 @@ const WINS = [
     location: 'Spa-Francorchamps',
     quote: 'For Anthoine. The first one will always carry him.',
     palette: 'from-sky-200 via-slate-500 to-[#001C40]',
+    imgSrc: WinBelgium19,
     span: 'lg:col-span-2 lg:row-span-2',
   },
   {
@@ -16,6 +27,7 @@ const WINS = [
     location: 'Autodromo Nazionale Monza',
     quote: 'A dream. The Tifosi made the final laps feel endless.',
     palette: 'from-red-500 via-[#FF2800] to-stone-900',
+    imgSrc: WinItaly19,
     span: '',
   },
   {
@@ -24,6 +36,7 @@ const WINS = [
     location: 'Bahrain International Circuit',
     quote: 'Ferrari is back, and the desert lights are red.',
     palette: 'from-amber-200 via-orange-500 to-red-950',
+    imgSrc: WinBahrain22,
     span: '',
   },
   {
@@ -32,6 +45,7 @@ const WINS = [
     location: 'Albert Park Circuit',
     quote: 'Grand slam energy: pole, win, fastest lap, total command.',
     palette: 'from-emerald-200 via-sky-500 to-blue-950',
+    imgSrc: WinAustralia22,
     span: 'lg:row-span-2',
   },
   {
@@ -40,6 +54,7 @@ const WINS = [
     location: 'Red Bull Ring',
     quote: 'Throttle problem, pressure everywhere, still P1.',
     palette: 'from-rose-200 via-red-500 to-zinc-950',
+    imgSrc: WinAustria22,
     span: '',
   },
   {
@@ -48,6 +63,7 @@ const WINS = [
     location: 'Circuit de Monaco',
     quote: 'YES! YES! YES! Grazie mille Scuderia!',
     palette: 'from-yellow-100 via-cyan-400 to-[#001C40]',
+    imgSrc: WinMonaco24,
     span: 'lg:col-span-2 lg:row-span-2',
   },
   {
@@ -56,6 +72,7 @@ const WINS = [
     location: 'Autodromo Nazionale Monza',
     quote: 'Monza again. One stop, giant nerve, red smoke everywhere.',
     palette: 'from-white via-[#FF2800] to-emerald-950',
+    imgSrc: WinItaly24,
     span: '',
   },
   {
@@ -64,6 +81,7 @@ const WINS = [
     location: 'Circuit of the Americas',
     quote: 'Austin turned into a scarlet Sunday.',
     palette: 'from-blue-200 via-red-500 to-indigo-950',
+    imgSrc: WinUS24,
     span: '',
   },
 ];
@@ -80,9 +98,18 @@ function WinCard({ win, index }: { win: (typeof WINS)[number]; index: number }) 
       onMouseLeave={() => setHovered(false)}
       className={`group relative min-h-[17rem] overflow-hidden rounded-[2.2rem] border border-white/65 bg-white/60 shadow-[0_28px_80px_rgba(0,28,64,0.12)] backdrop-blur-2xl ${win.span}`}
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${win.palette}`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(255,255,255,0.88),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.42),transparent_18%)] opacity-90" />
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#001C40]/90 via-[#001C40]/35 to-transparent" />
+      {/* Background Image Layer */}
+      <div className="absolute inset-0">
+        <img
+          src={win.imgSrc}
+          alt={win.gp}
+          className="h-full w-full object-cover opacity-[0.82] saturate-[1.08] transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+
+      <div className={`absolute inset-0 bg-gradient-to-br ${win.palette} opacity-[0.18]`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(255,255,255,0.24),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.14),transparent_18%)] opacity-60" />
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#001C40]/78 via-[#001C40]/24 to-transparent" />
       <div className="absolute bottom-8 right-8 font-orbitron text-[7rem] font-black leading-none text-white/10">
         P1
       </div>

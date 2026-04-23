@@ -99,7 +99,9 @@ export default function Navbar({
                 key={item.id}
                 onClick={() => onFlavorChange(item.id)}
                 className={`flex items-center gap-2 px-3 py-2 font-syne text-[11px] transition ${
-                  flavor === item.id ? 'bg-white text-[var(--heading)]' : 'text-[var(--text-secondary)]'
+                  flavor === item.id
+                    ? 'bg-[#FFE66D] text-[#001C40]'
+                    : 'text-[var(--text-secondary)]'
                 }`}
                 title={`LEC flavor: ${item.label}`}
               >
